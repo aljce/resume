@@ -1,126 +1,238 @@
-\documentclass[letterpaper]{article}
+% LaTeX file for resume
 
-\usepackage{hyperref}
-\usepackage{geometry}
+% possible options include:
+%   font size (10pt, 11pt and 12pt)
+%   paper size (a4paper, a5paper, letterpaper, legalpaper, and landscape)
+%   font family (sans and roman)
+\documentclass[10pt,letterpaper,sans]{moderncv}
 
-\usepackage[T1]{fontenc}
-\usepackage[sc,osf]{mathpazo}
+%\usepackage{fontspec}
 
-\def\name{Kyle McKean}
+\usepackage{tikz}
 
-\def\footerlink{https://github.com/mckeankylej/resume}
+\newcommand{\ghCommit}[1]{%
+\begin{tikzpicture}[y=0.7pt,x=0.7pt,yscale=-1, inner sep=0pt, outer sep=0pt]%
+  \path[even odd rule,fill=#1]%
+  (10.86,7.00) .. controls (10.41,5.28) and%
+  (8.86,4.00) .. (7.00,4.00) .. controls (5.14,4.00) and%
+  (3.59,5.28) .. (3.14,7.00) -- (0.00,7.00) -- (0.00,9.00) --%
+  (3.14,9.00) .. controls (3.59,10.72) and (5.14,12.00) ..%
+  (7.00,12.00) .. controls (8.86,12.00) and (10.41,10.72) ..%
+  (10.86,9.00) -- (14.00,9.00) -- (14.00,7.00) -- (10.86,7.00)%
+  -- cycle(7.00,10.20) .. controls (5.78,10.20) and (4.80,9.22) ..%
+  (4.80,8.00) .. controls (4.80,6.78) and (5.78,5.80) ..%
+  (7.00,5.80) .. controls (8.22,5.80) and (9.20,6.78) ..%
+  (9.20,8.00) .. controls (9.20,9.22) and (8.22,10.20) ..%
+  (7.00,10.20) -- cycle;%
+\end{tikzpicture}}
 
-% The following metadata will show up in the PDF properties
-\hypersetup{
-  colorlinks = true,
-  urlcolor = black,
-  pdfauthor = {\name},
-  pdfkeywords = {computer science, mathematics},
-  pdftitle = {\name: Curriculum Vitae},
-  pdfsubject = {Curriculum Vitae},
-  pdfpagemode = UseNone
+% style options are casual (default), classic, banking, oldstyle and fancy
+% color options black, blue (default), burgundy, green, grey, orange, and red
+\moderncvstyle{casual}
+\moderncvcolor{blue}
+%\moderncvicons{marvosym}
+
+% to set the default font:
+%   use \sfdefault for the default sans serif font
+%   use \rmdefault for the default roman one
+%   or use any TeX font name
+\renewcommand{\familydefault}{\sfdefault}
+
+% Disable page numbers
+\nopagenumbers{}
+
+% character encoding
+%\usepackage[utf8]{inputenc}
+
+% adjust the page margins
+\usepackage[scale=0.75]{geometry}
+
+% extra packages
+\usepackage{booktabs}
+
+% if you want to change the width of the column with the dates
+%%\setlength{\hintscolumnwidth}{3cm}
+
+% if you want to force the width allocated to your name and avoid line breaks
+%%\setlength{\makecvtitlenamewidth}{10cm}
+
+\name{Kyle}{McKean}
+\email{mckeankylej@gmail.com}
+\social[github]{mckeankylej}
+\phone{+1 770 335 0640}
+% \address{1616 SE Insley St.}{Portland, OR 97202}
+
+\newcommand{\wlink}[2]{\textcolor[HTML]{0020B6}{\href{#1}{#2}}}
+
+\newcommand{\nixpkg}[2]{%
+  \wlink{https://github.com/NixOS/nixpkgs/tree/master/#1}%
+        {#2}%
 }
 
-\geometry{
-  body={6.5in, 8.5in},
-  left=1.0in,
-  top=1.25in
+\newcommand{\ghlink}[2]{\wlink{https://github.com/#1}{#2}}
+\newcommand{\ghrepo}[1]{\ghlink{#1}{\faGithub}}
+\newcommand{\ghlang}[1]{\texttt{#1}}
+\newcommand{\ghcom}[1]{\textcolor[HTML]{666666}{\ghCommit{} #1}}
+\newcommand{\ghadd}[1]{\textcolor[HTML]{30A622}{{\faPlusCircle} #1}}
+\newcommand{\ghrem}[1]{\textcolor[HTML]{BD2C00}{{\faMinusCircle} #1}}
+\newcommand{\ghstar}[1]{#1}
+\newcommand{\ghfork}[1]{#1}
+\newcommand{\ghtr}[0]{}
+\newcommand{\ghtf}[0]{\faCodeFork}
+
+\newcommand{\ghub}[4]{\ghrepo{#2} | \ghlang{#1} | \ghadd{#3} | \ghrem{#4}}
+\newcommand{\ghtable}[6]{#1 & #2 & #3 & #4 & #5 & #6 \\}
+\newcommand{\ght}[9]{%
+  \ghtable{#1}
+          {\ghlink{#2/#3}{#3}}
+          {\ghlang{#4}}
+          {\ghcom{#5}}
+          {\ghadd{#6}}
+          {\ghrem{#7}}%
 }
 
-% Customize page headers
-\pagestyle{myheadings}
-\markright{\name}
-\thispagestyle{empty}
+\newcommand{\lang}[1]{\texttt{#1}}
 
-% Custom section fonts
-\usepackage{sectsty}
-\sectionfont{\rmfamily\mdseries\Large}
-\subsectionfont{\rmfamily\mdseries\itshape\large}
+\newcommand{\course}[2]{\texttt{#1 #2}}
+\newcommand{\credit}[0]{$\star$}
 
-% Other possible font commands include:
-% \ttfamily for teletype,
-% \sffamily for sans serif,
-% \bfseries for bold,
-% \scshape for small caps,
-% \normalsize, \large, \Large, \LARGE sizes.
-
-% Don't indent paragraphs.
-\setlength\parindent{0em}
-
-% Make lists without bullets
-\renewenvironment{itemize}{
-  \begin{list}{}{
-    \setlength{\leftmargin}{1.5em}
-  }
-}{
-  \end{list}
-}
+\usepackage{tabularx}
 
 \begin{document}
+\makecvtitle{}
 
-\centerline{\huge \bf \name}
+\section{Education}
+\cventry{2017--2020}
+        {BS, Computer Science}
+        {\wlink{https://reed.edu/}{Reed College}}
+        {Portland OR}{}
+        {}
 
-\vspace{0.25in}
+\vfill{}
 
-170 Boulevard SE E103 \hfill 770-335-0640 \\
-Atlanta, GA           \hfill \href{mailto:mckean.kylej@gmail.com}{\tt mckean.kylej@gmail.com} \\
-30312 USA             \hfill \href{https://github.com/mckeankylej}{\tt github.com/mckeankylej}
+\section{Work Experience}
 
-\section*{Education}
-
-\begin{itemize}
-  \item Georgia State University, BS Computer Science
-  \begin{itemize}
-      \item \textbullet{} Expected May 2018
-      \item \textbullet{} Cum. GPA: 4.1
-  \end{itemize}
-
+\cventry{Summer 2019}
+        {Software Engineering Intern}
+        {\wlink{https://mercury.co/}{Mercury Bank}}
+        {}{}
+        {
+\begin{itemize}         
+\item Developed 12+ third party bank integrations.
+\item Improved fraud detection for domestic wires.
+\item \ghub{Haskell}{mercury-technologies}{3049}{474}
 \end{itemize}
+}
 
-
-\section*{Employment}
-
+\cventry{2016-2017}
+        {Software Engineer}
+        {\wlink{http://layer3com.com/}{Layer 3 Communications}}
+        {}{}
+        {
 \begin{itemize}
-    \item Layer 3 Communications, Software Engineer 
-    \begin{itemize}
-        \item \textbullet{} May 2016 - Present | Atlanta, GA
-        \item \textbullet{} I developed a full NPM (Network Performance Monitor) as well as many smaller side projects. Although the NPM started out as an in house tool, it is now running locally at 7 of Layer 3's customers.
-    \end{itemize}
+\item Co-authored a network threat analysis application in \lang{Haskell}.
+\item The application collected, parsed, enriched, and correlated 80,000 logs
+  a second.
+\item I managed the deployment to Atlanta City Government (10GB of logs a day).
+\item Orchestrated the Elasticsearch cluster and Postgres instance.
+\item \ghub{Haskell}{layer-3-communications}{18029}{17186}
 \end{itemize}
+}
 
-\section*{Skills}
-
+\cventry{Summer 2016}
+        {Software Engineering Intern}
+        {\wlink{http://layer3com.com/}{Layer 3 Communications}}
+        {}{}
+        {
 \begin{itemize}
-    \item Expert in Typed Functional Programming (Haskell/Agda/Idris)
-    \item Well versed in the nix build language and surrounding ecosystem
-    \item Fluent in the languages of the web (HTML/CSS/JS)
+\item Developed a log collection and analytics tool in \lang{Haskell}.
+\item Then managed the deployment of said application to 100+ client boxes with \lang{Nix}.
+\item \ghub{Haskell}{layer-3-communications}{6052}{3415}
 \end{itemize}
+}
 
-\section*{Open Source}
 
-\begin{itemize}
-    \item \href{https://github.com/mckeankylej/servant-render}{Servant Render}
-    \begin{itemize}
-        \item \textbullet{} A web framework designed around servant and reflex-dom. It combines the effortless routing of servant with the equally effortless DOM manipulation of reflex-dom into an intuitive reactive web framework. 
-    \end{itemize}
-    \item \href{https://github.com/mckeankylej/fast-nats}{Fast-nats} and      \href{https://github.com/mckeankylej/fast-vec}{Fast-vec}
-    \begin{itemize}
-        \item \textbullet{} Are packages focused on improving the speed of dependently typed programs in GHC while retaining as much type safety as possible. The packages export a well typed interface to machine integers and arrays respectively.
-    \end{itemize}
-    \item \href{https://github.com/mckeankylej/hchess}{HChess} 
-    \begin{itemize}
-        \item \textbullet{} A  haskell chess engine implemented with magic bitboards as the board representation.
-    \end{itemize}
-\end{itemize}
+\vfill{}
 
-\bigskip
+\section{Extracurricular}
 
-% Footer
-\begin{center}
-  \begin{footnotesize}
-    Last updated: \today \\
-    \href{\footerlink}{\texttt{\footerlink}}
-  \end{footnotesize}
-\end{center}
+
+% \cventry{2016--}
+%         {Hobby}
+%         {\wlink{http://nixos.org}{NixOS} Package Maintainer}
+%         {}{}{
+% Maintainer for %
+% \nixpkg{pkgs/servers/search/elasticsearch/default.nix}{elasticsearch}, %
+% \nixpkg{nixos/modules/services/monitoring/graphite.nix}{graphite}, and %
+% \nixpkg{nixos/modules/services/monitoring/graphana.nix}{graphana}.%
+% }
+
+\cventry{2017--}
+        {Lecture}
+        {\wlink{http://reed.edu}{Reed College} Math Colloquium}
+        {}{}{
+          \begin{itemize}
+          \item Formalizing the metatheory of bidirectional type theory
+          \item Lambda Calculus as a foundation of computability theory
+          \end{itemize}
+          % I gave a talk in 2017 on formalizing the metatheory of bidirectional
+          % type theory \\ with a focus on implementation details. \\
+          % In 2018 I gave a talk on lambda calculus as a foundation of
+          % computability theory.
+}
+
+\cventry{2016--}
+        {Hobby}
+        {\wlink{http://spacemacs.org}{Spacemacs} Haskell Layer Maintainer}
+        {}{}{
+          \begin{itemize}
+          \item Created the dante-spacemacs interop.
+          \item This is one of the most widely used IDE experiences for
+            \lang{Haskell}.
+          \end{itemize}
+}
+
+\cventry{2010--}
+        {Hobby}
+        {\wlink{https://github.com/taktoa}{Open Source Programming}}
+        {}{}{
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{l l l l l l}
+  \midrule
+  \ght{\ghtr{}}{haskell-trasa}{trasa}{Haskell}{152}{4012}{2771}{0}{0}
+  \ght{\ghtf{}}{andrewthad}{chronos}{Haskell}{34}{2532}{1201}{0}{0}
+  \ght{\ghtf{}}{nixos}{nixpkgs}{Nix}{31}{568}{36}{0}{0}
+  \ght{\ghtr{}}{mckeankylej}{kpf}{Haskell}{24}{1310}{192}{0}{0}
+  \ght{\ghtr{}}{mckeankylej}{ferus}{Rust}{14}{1533}{310}{0}{0}
+  \ght{\ghtf{}}{syl20bnr}{spacemacs}{Emacs Lisp}{10}{251}{54}{0}{0}
+  \ght{\ghtr{}}{mckeankylej}{hmap}{Agda}{6}{525}{128}{0}{0}
+  \midrule
+\end{tabular}
+}
+
+
+% \vfill{0.6em}
+\vfill{}
+
+\section{Skills}
+% \cvitem{Languages}{English (native), Latin (5 yrs)}
+\cvitem{Languages}{%
+  \href{https://en.wikipedia.org/wiki/Haskell_(programming_language)}{\lang{Haskell}} (9 yrs), %
+  % \href{https://en.wikipedia.org/wiki/Nix_package_manager}{\lang{Nix}} (4 yrs), %
+  \href{https://en.wikipedia.org/wiki/SQL}{\lang{SQL}}, %
+  \href{https://en.wikipedia.org/wiki/Agda_(programming_language)}{\lang{Agda}}, %
+  \href{https://en.wikipedia.org/wiki/Rust_(programming_language)}{\lang{Rust}}, %
+  \href{https://en.wikipedia.org/wiki/C_(programming_language)}{\lang{C}}, %
+  \href{https://en.wikipedia.org/wiki/C++}{\lang{C++}}, %
+  \href{https://en.wikipedia.org/wiki/Java_(programming_language)}{\lang{Java}}, %
+  \href{https://en.wikipedia.org/wiki/Python_(programming_language)}{\lang{Python}}%
+}
+\cvitem{Software}{%
+  \href{https://en.wikipedia.org/wiki/Linux}{Linux} (10 yrs), %
+  \href{https://nixos.org}{Debian}, %
+  \href{https://nixos.org}{NixOS}, %
+  \href{https://git-scm.com}{git}, %
+  \href{https://www.latex-project.org}{\LaTeX} %
+}
 
 \end{document}
