@@ -6,49 +6,20 @@
 %   font family (sans and roman)
 \documentclass[10pt,letterpaper,sans]{moderncv}
 
-%\usepackage{fontspec}
-
-\usepackage{tikz}
-
-\newcommand{\ghCommit}[1]{%
-\begin{tikzpicture}[y=0.7pt,x=0.7pt,yscale=-1, inner sep=0pt, outer sep=0pt]%
-  \path[even odd rule,fill=#1]%
-  (10.86,7.00) .. controls (10.41,5.28) and%
-  (8.86,4.00) .. (7.00,4.00) .. controls (5.14,4.00) and%
-  (3.59,5.28) .. (3.14,7.00) -- (0.00,7.00) -- (0.00,9.00) --%
-  (3.14,9.00) .. controls (3.59,10.72) and (5.14,12.00) ..%
-  (7.00,12.00) .. controls (8.86,12.00) and (10.41,10.72) ..%
-  (10.86,9.00) -- (14.00,9.00) -- (14.00,7.00) -- (10.86,7.00)%
-  -- cycle(7.00,10.20) .. controls (5.78,10.20) and (4.80,9.22) ..%
-  (4.80,8.00) .. controls (4.80,6.78) and (5.78,5.80) ..%
-  (7.00,5.80) .. controls (8.22,5.80) and (9.20,6.78) ..%
-  (9.20,8.00) .. controls (9.20,9.22) and (8.22,10.20) ..%
-  (7.00,10.20) -- cycle;%
-\end{tikzpicture}}
-
 % style options are casual (default), classic, banking, oldstyle and fancy
 % color options black, blue (default), burgundy, green, grey, orange, and red
 \moderncvstyle{casual}
 \moderncvcolor{blue}
 %\moderncvicons{marvosym}
 
-% to set the default font:
-%   use \sfdefault for the default sans serif font
-%   use \rmdefault for the default roman one
-%   or use any TeX font name
-\renewcommand{\familydefault}{\sfdefault}
-
 % Disable page numbers
 \nopagenumbers{}
 
 % character encoding
-%\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
 
 % adjust the page margins
 \usepackage[scale=0.75]{geometry}
-
-% extra packages
-\usepackage{booktabs}
 
 % if you want to change the width of the column with the dates
 %%\setlength{\hintscolumnwidth}{3cm}
@@ -58,16 +29,11 @@
 
 \name{Alice}{McKean}
 \email{mckeankylej@gmail.com}
-\social[github]{mckeankylej}
+\social[github]{aljce}
 \phone{+1 770 335 0640}
-% \address{1616 SE Insley St.}{Portland, OR 97202}
 
 \newcommand{\wlink}[2]{\textcolor[HTML]{0020B6}{\href{#1}{#2}}}
-
-\newcommand{\nixpkg}[2]{%
-  \wlink{https://github.com/NixOS/nixpkgs/tree/master/#1}%
-        {#2}%
-}
+\newcommand{\lang}[1]{\texttt{#1}}
 
 \newcommand{\ghlink}[2]{\wlink{https://github.com/#1}{#2}}
 \newcommand{\ghrepo}[1]{\ghlink{#1}{\faGithub}}
@@ -75,42 +41,32 @@
 \newcommand{\ghcom}[1]{\textcolor[HTML]{666666}{\ghCommit{} #1}}
 \newcommand{\ghadd}[1]{\textcolor[HTML]{30A622}{{\faPlusCircle} #1}}
 \newcommand{\ghrem}[1]{\textcolor[HTML]{BD2C00}{{\faMinusCircle} #1}}
-\newcommand{\ghstar}[1]{#1}
-\newcommand{\ghfork}[1]{#1}
-\newcommand{\ghtr}[0]{}
 \newcommand{\ghtf}[0]{\faCodeFork}
 
 \newcommand{\ghub}[4]{\ghrepo{#2} | \ghlang{#1} | \ghadd{#3} | \ghrem{#4}}
-\newcommand{\ghtable}[6]{#1 & #2 & #3 & #4 & #5 & #6 \\}
-\newcommand{\ght}[9]{%
-  \ghtable{#1}
-          {\ghlink{#2/#3}{#3}}
-          {\ghlang{#4}}
-          {\ghcom{#5}}
-          {\ghadd{#6}}
-          {\ghrem{#7}}%
-}
-
-\newcommand{\lang}[1]{\texttt{#1}}
-
-\newcommand{\course}[2]{\texttt{#1 #2}}
-\newcommand{\credit}[0]{$\star$}
-
-\usepackage{tabularx}
 
 \begin{document}
 \makecvtitle{}
 
-\section{Education}
-\cventry{2017--2020}
-        {BS, Computer Science}
-        {\wlink{https://reed.edu/}{Reed College}}
-        {Portland OR}{}
-        {}
-
-\vfill{}
-
 \section{Work Experience}
+
+\cventry
+{2020--Present}
+{Software + Infrastructure Engineer}
+{\wlink{https://mercury.co/}{Mercury Bank}}
+{}{}
+{
+  \begin{itemize}         
+  \item Managed an entire AWS stack with nix autodeploys that ran through Hydra.
+  \item Oversaw the migration to 100\% infrastructure as code via terraform.
+  \item Personally handled complex Postgres upgrades that required planned downtime.
+  \item Migrated the company to a new VPN that allowed for finer access controls
+    for our admins.
+  \item Added structured logging to the backend via Elasticsearch.
+  \item \ghub{Haskell + Nix + Terraform}{mercury-technologies}{27165}{24032}
+  \end{itemize}
+}
+
 
 \cventry{Summer 2019}
         {Software Engineering Intern}
@@ -124,7 +80,7 @@
 \end{itemize}
 }
 
-\cventry{2016-2017}
+\cventry{2016--2017}
         {Software Engineer}
         {\wlink{http://layer3com.com/}{Layer 3 Communications}}
         {}{}
@@ -151,86 +107,57 @@
 \end{itemize}
 }
 
+\section{Education}
+\cventry
+{2017--2020}
+{BS, Computer Science}
+{\wlink{https://reed.edu}{Reed College}}
+{Portland, OR}
+{}
+{}
 
-\vfill{}
+\section{Undergraduate Thesis}
+\cventry
+{2019--2020}
+{A Replication of the AKS Primality Decision Algorithm}
+{}
+{}
+{}
+{
+  \begin{itemize}         
+  \item Developed a formalization of the AKS primality decision algorithm in the Agda proof assistant.
+  \item Included expository sections describing how to formalize non trivial proofs in Agda.
+  \item \ghub{Agda}{aljce/thesis}{3152}{565}
+  \end{itemize}
+}
 
 \section{Extracurricular}
-
-
-% \cventry{2016--}
-%         {Hobby}
-%         {\wlink{http://nixos.org}{NixOS} Package Maintainer}
-%         {}{}{
-% Maintainer for %
-% \nixpkg{pkgs/servers/search/elasticsearch/default.nix}{elasticsearch}, %
-% \nixpkg{nixos/modules/services/monitoring/graphite.nix}{graphite}, and %
-% \nixpkg{nixos/modules/services/monitoring/graphana.nix}{graphana}.%
-% }
-
-\cventry{2017--}
-        {Lecture}
-        {\wlink{http://reed.edu}{Reed College} Math Colloquium}
-        {}{}{
-          \begin{itemize}
-          \item Formalizing the metatheory of bidirectional type theory
-          \item Lambda Calculus as a foundation of computability theory
-          \end{itemize}
-          % I gave a talk in 2017 on formalizing the metatheory of bidirectional
-          % type theory \\ with a focus on implementation details. \\
-          % In 2018 I gave a talk on lambda calculus as a foundation of
-          % computability theory.
+\cventry{2017--2020}
+{Lecture}
+{\wlink{http://reed.edu}{Reed College} Math Colloquium}
+{}{}{
+  \begin{itemize}
+  \item Formalizing the metatheory of bidirectional type theory
+  \item Lambda Calculus as a foundation of computability theory
+  \end{itemize}
 }
-
-\cventry{2016--}
-        {Hobby}
-        {\wlink{http://spacemacs.org}{Spacemacs} Haskell Layer Maintainer}
-        {}{}{
-          \begin{itemize}
-          \item Created the dante-spacemacs interop.
-          \item This is one of the most widely used IDE experiences for
-            \lang{Haskell}.
-          \end{itemize}
-}
-
-\cventry{2010--}
-        {Hobby}
-        {\wlink{https://github.com/taktoa}{Open Source Programming}}
-        {}{}{
-\setlength{\tabcolsep}{8pt}
-\begin{tabular}{l l l l l l}
-  \midrule
-  \ght{\ghtr{}}{haskell-trasa}{trasa}{Haskell}{152}{4012}{2771}{0}{0}
-  \ght{\ghtf{}}{andrewthad}{chronos}{Haskell}{34}{2532}{1201}{0}{0}
-  \ght{\ghtf{}}{nixos}{nixpkgs}{Nix}{31}{568}{36}{0}{0}
-  \ght{\ghtr{}}{mckeankylej}{kpf}{Haskell}{24}{1310}{192}{0}{0}
-  \ght{\ghtr{}}{mckeankylej}{ferus}{Rust}{14}{1533}{310}{0}{0}
-  \ght{\ghtf{}}{syl20bnr}{spacemacs}{Emacs Lisp}{10}{251}{54}{0}{0}
-  \ght{\ghtr{}}{mckeankylej}{hmap}{Agda}{6}{525}{128}{0}{0}
-  \midrule
-\end{tabular}
-}
-
-
-% \vfill{0.6em}
-\vfill{}
 
 \section{Skills}
-% \cvitem{Languages}{English (native), Latin (5 yrs)}
-\cvitem{Languages}{%
-  \href{https://en.wikipedia.org/wiki/Haskell_(programming_language)}{\lang{Haskell}} (9 yrs), %
-  % \href{https://en.wikipedia.org/wiki/Nix_package_manager}{\lang{Nix}} (4 yrs), %
+\cvitem{Languages}{
+  \href{https://en.wikipedia.org/wiki/Haskell_(programming_language)}{\lang{Haskell}} (9 yrs),
+  \href{https://en.wikipedia.org/wiki/Nix_package_manager}{\lang{Nix}} (6 yrs), %
+  \href{https://en.wikipedia.org/wiki/Terraform_(software)}{\lang{Terraform}}, %
   \href{https://en.wikipedia.org/wiki/SQL}{\lang{SQL}}, %
-  \href{https://en.wikipedia.org/wiki/Agda_(programming_language)}{\lang{Agda}}, %
-  \href{https://en.wikipedia.org/wiki/Rust_(programming_language)}{\lang{Rust}}, %
-  \href{https://en.wikipedia.org/wiki/C_(programming_language)}{\lang{C}}, %
-  \href{https://en.wikipedia.org/wiki/C++}{\lang{C++}}, %
   \href{https://en.wikipedia.org/wiki/Java_(programming_language)}{\lang{Java}}, %
-  \href{https://en.wikipedia.org/wiki/Python_(programming_language)}{\lang{Python}}%
+  \href{https://en.wikipedia.org/wiki/Python_(programming_language)}{\lang{Python}}, %
+  \href{https://en.wikipedia.org/wiki/TypeScript}{\lang{TypeScript}}%
 }
 \cvitem{Software}{%
   \href{https://en.wikipedia.org/wiki/Linux}{Linux} (10 yrs), %
-  \href{https://nixos.org}{Debian}, %
+  \href{https://debian.org}{Debian}, %
   \href{https://nixos.org}{NixOS}, %
+  \href{https://aws.amazon.com}{AWS}, %
+  \href{https://postgresql.org}{PostgreSQL}, %
   \href{https://git-scm.com}{git}, %
   \href{https://www.latex-project.org}{\LaTeX} %
 }
